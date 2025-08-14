@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Tools Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Matrix Rain Background -->
+    <canvas id="matrix-canvas"></canvas>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="matrix-text">MATRIX</span>
+                <span class="tools-text">TOOLS</span>
+            </div>
+            <nav class="nav">
+                <a href="#text-to-audio" class="nav-link">Text to Audio</a>
+                <a href="#image-to-pdf" class="nav-link">Image to PDF</a>
+                <a href="#pdf-merge" class="nav-link">PDF Merge</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">
+                <span class="glitch" data-text="DIGITAL TOOLS">DIGITAL TOOLS</span>
+            </h1>
+            <p class="hero-subtitle">Enter the Matrix of Productivity</p>
+            <div class="hero-grid">
+                <div class="hero-card">
+                    <div class="card-icon">🎵</div>
+                    <h3>Text to Audio</h3>
+                    <p>Convert text to speech with AI</p>
+                </div>
+                <div class="hero-card">
+                    <div class="card-icon">📄</div>
+                    <h3>Image to PDF</h3>
+                    <p>Transform images to PDF format</p>
+                </div>
+                <div class="hero-card">
+                    <div class="card-icon">🔗</div>
+                    <h3>PDF Merge</h3>
+                    <p>Combine multiple PDFs into one</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Text to Audio Section -->
+    <section id="text-to-audio" class="tool-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="matrix-bracket">[</span>
+                TEXT TO AUDIO
+                <span class="matrix-bracket">]</span>
+            </h2>
+            <div class="tool-card">
+                <div class="input-group">
+                    <label for="text-input">Enter Text</label>
+                    <textarea id="text-input" placeholder="Type your text here..." rows="6"></textarea>
+                </div>
+                <div class="controls-row">
+                    <div class="input-group">
+                        <label for="voice-select">Voice</label>
+                        <select id="voice-select">
+                            <option value="male">Male Voice</option>
+                            <option value="female">Female Voice</option>
+                            <option value="neural">Neural Voice</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="speed-range">Speed</label>
+                        <input type="range" id="speed-range" min="0.5" max="2" step="0.1" value="1">
+                        <span id="speed-value">1.0x</span>
+                    </div>
+                </div>
+                <button class="matrix-btn" id="generate-audio-btn">
+                    <span class="btn-text">GENERATE AUDIO</span>
+                    <span class="btn-effect"></span>
+                </button>
+                <div id="audio-result" class="result-area hidden">
+                    <div class="loading" id="audio-loading">
+                        <div class="matrix-loader"></div>
+                        <span>Processing...</span>
+                    </div>
+                    <div id="audio-output" class="hidden">
+                        <audio controls></audio>
+                        <button class="download-btn">Download Audio</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image to PDF Section -->
+    <section id="image-to-pdf" class="tool-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="matrix-bracket">[</span>
+                IMAGE TO PDF
+                <span class="matrix-bracket">]</span>
+            </h2>
+            <div class="tool-card">
+                <div class="upload-area" id="image-upload-area">
+                    <div class="upload-icon">📁</div>
+                    <p>Drop images here or click to upload</p>
+                    <input type="file" id="image-input" multiple accept="image/*" hidden>
+                </div>
+                <div id="image-preview" class="preview-area hidden"></div>
+                <div class="controls-row">
+                    <div class="input-group">
+                        <label for="pdf-quality">Quality</label>
+                        <select id="pdf-quality">
+                            <option value="high">High Quality</option>
+                            <option value="medium">Medium Quality</option>
+                            <option value="low">Low Quality</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="pdf-orientation">Orientation</label>
+                        <select id="pdf-orientation">
+                            <option value="portrait">Portrait</option>
+                            <option value="landscape">Landscape</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="matrix-btn" id="convert-pdf-btn" disabled>
+                    <span class="btn-text">CONVERT TO PDF</span>
+                    <span class="btn-effect"></span>
+                </button>
+                <div id="pdf-result" class="result-area hidden">
+                    <div class="loading" id="pdf-loading">
+                        <div class="matrix-loader"></div>
+                        <span>Converting...</span>
+                    </div>
+                    <div id="pdf-output" class="hidden">
+                        <div class="success-message">PDF created successfully!</div>
+                        <button class="download-btn">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PDF Merge Section -->
+    <section id="pdf-merge" class="tool-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="matrix-bracket">[</span>
+                PDF MERGE
+                <span class="matrix-bracket">]</span>
+            </h2>
+            <div class="tool-card">
+                <div class="upload-area" id="pdf-upload-area">
+                    <div class="upload-icon">📑</div>
+                    <p>Drop PDF files here or click to upload</p>
+                    <input type="file" id="pdf-input" multiple accept=".pdf" hidden>
+                </div>
+                <div id="pdf-list" class="file-list hidden"></div>
+                <div class="controls-row">
+                    <div class="input-group">
+                        <label for="merge-filename">Output Filename</label>
+                        <input type="text" id="merge-filename" placeholder="merged-document.pdf" value="merged-document.pdf">
+                    </div>
+                </div>
+                <button class="matrix-btn" id="merge-pdf-btn" disabled>
+                    <span class="btn-text">MERGE PDFs</span>
+                    <span class="btn-effect"></span>
+                </button>
+                <div id="merge-result" class="result-area hidden">
+                    <div class="loading" id="merge-loading">
+                        <div class="matrix-loader"></div>
+                        <span>Merging...</span>
+                    </div>
+                    <div id="merge-output" class="hidden">
+                        <div class="success-message">PDFs merged successfully!</div>
+                        <button class="download-btn">Download Merged PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Matrix Tools Hub. Enter the Matrix.</p>
+            <div class="matrix-code">01001101 01000001 01010100 01010010 01001001 01011000</div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
